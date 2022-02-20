@@ -1,4 +1,4 @@
-# Ethernaut - Solutions
+# Damn Vulnerable DeFi - Solutions
 
 ## 1. Unstoppable
 
