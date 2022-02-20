@@ -8,8 +8,8 @@ See [unstoppable.challenge.js](./test/unstoppable/unstoppable.challenge.js)
 
 ## 2. Naive receiver
 
-The receiver's funds can be drained by executing flash loans on his behalf (initiated by the attacker).
-See [naive-receiver.challenge.js](./test/naive-receiver/naive-receiver.challenge.js) and [NaiveReceiverAttack.sol](./contracts/attacker-contracts/NaiveReceiverAttack.sol).  
+The receiver's funds can be drained by executing flash loans on his behalf (initiated by the attacker).  
+See [naive-receiver.challenge.js](./test/naive-receiver/naive-receiver.challenge.js) and [NaiveReceiverAttack.sol](./contracts/attacker-contracts/NaiveReceiverAttack.sol).
 
 
 ## 3. Truster
