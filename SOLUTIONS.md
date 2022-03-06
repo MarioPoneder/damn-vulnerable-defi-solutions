@@ -15,6 +15,6 @@ See [naive-receiver.challenge.js](./test/naive-receiver/naive-receiver.challenge
 ## 3. Truster
 
 This lender contract allows us to call any function during flash loan execution on its behalf. Therefore, simply call the ERC20 token's `approve` function from the lender contract.  
-See [truster.challenge.js](./test/truster/truster.challenge.js) and [NaiveReceiverAttack.sol](./contracts/attacker-contracts/TrusterAttack.sol).
+See [truster.challenge.js](./test/truster/truster.challenge.js) and [TrusterAttack.sol](./contracts/attacker-contracts/TrusterAttack.sol).
 
 
