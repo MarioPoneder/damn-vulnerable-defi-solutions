@@ -23,3 +23,6 @@ See [truster.challenge.js](./test/truster/truster.challenge.js) and [TrusterAtta
 This lender contract allows us to call its `deposit` function during flash loan execution without failure. Therefore we can easily withdraw the funds after "returning" the flash loan.  
 See [side-entrance.challenge.js](./test/side-entrance/side-entrance.challenge.js) and [SideEntranceAttack.sol](./contracts/attacker-contracts/SideEntranceAttack.sol).
 
+## 5. The rewarder
+
+
