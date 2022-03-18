@@ -25,4 +25,6 @@ See [side-entrance.challenge.js](./test/side-entrance/side-entrance.challenge.js
 
 ## 5. The rewarder
 
-
+As soon as a new snapshot is due in the rewarder pool, take out a flash loan of as many DVT tokens as you can and deposit them into the rewarder pool to trigger the snapshot and the reward distribution.
+Afterwards, you can immediately withdraw the DVT tokens again and pay back the flash loan. All in one transaction.  
+See [the-rewarder.challenge.js](./test/the-rewarder/the-rewarder.challenge.js) and [TheRewarderAttack.sol](./contracts/attacker-contracts/TheRewarderAttack.sol).
