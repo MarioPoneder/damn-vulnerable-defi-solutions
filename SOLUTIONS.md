@@ -28,3 +28,9 @@ See [side-entrance.challenge.js](./test/side-entrance/side-entrance.challenge.js
 As soon as a new snapshot is due in the rewarder pool, take out a flash loan of as many DVT tokens as you can and deposit them into the rewarder pool to trigger the snapshot and the reward distribution.
 Afterwards, you can immediately withdraw the DVT tokens again and pay back the flash loan. All in one transaction.  
 See [the-rewarder.challenge.js](./test/the-rewarder/the-rewarder.challenge.js) and [TheRewarderAttack.sol](./contracts/attacker-contracts/TheRewarderAttack.sol).
+
+## 6. Selfie
+
+Here we can just take out a flash loan of as many DVT tokens as possible and manually initiate a snapshot. This makes us eligible to perform a governance action, a malicious one,
+which withdraws all funds from the pool, to be specific.
+See [selfie.challenge.js](./test/selfie/selfie.challenge.js) and [SelfieAttack.sol](./contracts/attacker-contracts/SelfieAttack.sol).
