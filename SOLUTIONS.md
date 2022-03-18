@@ -32,5 +32,11 @@ See [the-rewarder.challenge.js](./test/the-rewarder/the-rewarder.challenge.js) a
 ## 6. Selfie
 
 Here we can just take out a flash loan of as many DVT tokens as possible and manually initiate a snapshot. This makes us eligible to perform a governance action, a malicious one,
-which withdraws all funds from the pool, to be specific.
+which withdraws all funds from the pool, to be specific.  
 See [selfie.challenge.js](./test/selfie/selfie.challenge.js) and [SelfieAttack.sol](./contracts/attacker-contracts/SelfieAttack.sol).
+
+
+## 7. Compromised
+
+Turns out that the strange server response contains the private keys for 2 of 3 "trusted" price oracle sources. Let's manipulate the DVNFT price to drain the exchange contract. 
+See [compromised.challenge.js](./test/compromised/compromised.challenge.js)
