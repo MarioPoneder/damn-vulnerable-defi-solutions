@@ -46,8 +46,13 @@ See [compromised.challenge.js](./test/compromised/compromised.challenge.js)
 
 ## 8. Puppet
 
-Because of the low liquidity of the DVT/ETH pair, we can easily manipulate the price and drain the DVT pool for a low (in comparison) ETH deposit.  
+Because of the low liquidity of the DVT/ETH pair (Uniswap v1), we can easily manipulate the price and drain the DVT pool for a low (in comparison) ETH deposit.  
 See [puppet.challenge.js](./test/puppet/puppet.challenge.js)
 
+
+## 9. Puppet v2
+
+Same as previous challenge but with a DVT/WETH pair (Uniswap v2) instead.  
+See [puppet-v2.challenge.js](./test/puppet-v2/puppet-v2.challenge.js)
 
 
