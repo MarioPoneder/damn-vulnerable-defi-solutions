@@ -23,11 +23,13 @@ See [truster.challenge.js](./test/truster/truster.challenge.js) and [TrusterAtta
 This lender contract allows us to call its `deposit` function during flash loan execution without failure. Therefore we can easily withdraw the funds after "returning" the flash loan.  
 See [side-entrance.challenge.js](./test/side-entrance/side-entrance.challenge.js) and [SideEntranceAttack.sol](./contracts/attacker-contracts/SideEntranceAttack.sol).
 
+
 ## 5. The rewarder
 
 As soon as a new snapshot is due in the rewarder pool, take out a flash loan of as many DVT tokens as you can and deposit them into the rewarder pool to trigger the snapshot and the reward distribution.
 Afterwards, you can immediately withdraw the DVT tokens again and pay back the flash loan. All in one transaction.  
 See [the-rewarder.challenge.js](./test/the-rewarder/the-rewarder.challenge.js) and [TheRewarderAttack.sol](./contracts/attacker-contracts/TheRewarderAttack.sol).
+
 
 ## 6. Selfie
 
@@ -38,5 +40,14 @@ See [selfie.challenge.js](./test/selfie/selfie.challenge.js) and [SelfieAttack.s
 
 ## 7. Compromised
 
-Turns out that the strange server response contains the private keys for 2 of 3 "trusted" price oracle sources. Let's manipulate the DVNFT price to drain the exchange contract. 
+Turns out that the strange server response contains the private keys for 2 of 3 "trusted" price oracle sources. Let's manipulate the DVNFT price to drain the exchange contract.  
 See [compromised.challenge.js](./test/compromised/compromised.challenge.js)
+
+
+## 8. Puppet
+
+Because of the low liquidity of the DVT/ETH pair, we can easily manipulate the price and drain the DVT pool for a low (in comparison) ETH deposit.  
+See [puppet.challenge.js](./test/puppet/puppet.challenge.js)
+
+
+
