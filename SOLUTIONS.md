@@ -62,5 +62,5 @@ The NFT marketplace contract in this challenge has two major vulnerabilities. Fi
 Second, the marketplace transfers the ETH paid for an NFT to its owner, but AFTER transferring ownership to the new owner, i.e. you get your ETH back after buying an NFT.  
 Therefore, we can complete the challenge by borrowing enough ETH for one NFT using an Uniswap flash swap, then drain all NFTs and ETH from the marketplace by simply "buying"
 all NFTs at once and afterwards transfer the NFTs to the mysterious buyer.  
-See [free-rider.challenge.js](./test/free-rider/free-rider.challenge.js) and [FreeRider.sol](./contracts/attacker-contracts/FreeRider.sol).
+See [free-rider.challenge.js](./test/free-rider/free-rider.challenge.js) and [FreeRiderAttack.sol](./contracts/attacker-contracts/FreeRiderAttack.sol).
 
