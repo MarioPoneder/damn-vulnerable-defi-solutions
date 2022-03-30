@@ -56,3 +56,11 @@ Same as previous challenge but with a DVT/WETH pair (Uniswap v2) instead.
 See [puppet-v2.challenge.js](./test/puppet-v2/puppet-v2.challenge.js)
 
 
+## 10. Free rider
+
+The NFT marketplace contract in this challenge has two major vulnerabilities. First, the improper of use of `msg.value` lets us buy many NFTs at once for the price of one.
+Second, the marketplace transfers the ETH paid for an NFT to its owner, but AFTER transferring ownership to the new owner, i.e. you get your ETH back after buying an NFT.  
+Therefore, we can complete the challenge by borrowing enough ETH for one NFT using an Uniswap flash swap, then drain all NFTs and ETH from the marketplace by simply "buying"
+all NFTs at once and afterwards transfer the NFTs to the mysterious buyer.  
+See [free-rider.challenge.js](./test/free-rider/free-rider.challenge.js) and [FreeRider.sol](./contracts/attacker-contracts/FreeRider.sol).
+
