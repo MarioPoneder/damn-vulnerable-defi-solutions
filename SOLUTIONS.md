@@ -64,3 +64,12 @@ Therefore, we can complete the challenge by borrowing enough ETH for one NFT usi
 all NFTs at once and afterwards transfer the NFTs to the mysterious buyer.  
 See [free-rider.challenge.js](./test/free-rider/free-rider.challenge.js) and [FreeRiderAttack.sol](./contracts/attacker-contracts/FreeRiderAttack.sol).
 
+
+## 11. Backdoor
+
+A Gnosis Safe wallet can be created by anyone for anyone, therefore we (the attacker) can create a wallet for each beneficiary of the registry.
+Unfortunately for us, even though the wallet was created by the attacker, funds can only be moved by the specified owner (the beneficiary).
+However, Gnosis built a little backdoor into their "safe" wallet which lets us call an arbitrary function using `delegatecall` (!!!) during wallet setup.
+This way, we can simply execute the `approve` function of the token, which is rewarded by the registry, on behalf of the "safe" wallet such that the attacker can
+simply withdraw them immediately afterwards.  
+See [backdoor.challenge.js](./test/backdoor/backdoor.challenge.js) and [BackdoorAttack.sol](./contracts/attacker-contracts/BackdoorAttack.sol).
