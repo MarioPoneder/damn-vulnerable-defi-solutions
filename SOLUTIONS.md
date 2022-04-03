@@ -73,3 +73,13 @@ However, Gnosis built a little backdoor into their "safe" wallet which lets us c
 This way, we can simply execute the `approve` function of the token, which is rewarded by the registry, on behalf of the "safe" wallet such that the attacker can
 simply withdraw them immediately afterwards.  
 See [backdoor.challenge.js](./test/backdoor/backdoor.challenge.js) and [BackdoorAttack.sol](./contracts/attacker-contracts/BackdoorAttack.sol).
+
+
+## 12. Climber
+
+The timelock contract, which is the owner of the vault contract, has a major vulnerability which also endangers the vault.
+The `execute` function of the timelock only checks if the executed operation is scheduled after executing it. This way, we can can change the proposer role
+of the timelock and schedule the operation during execution in order to pass the check.
+Once the timelock is taken over, we can schedule & execute an operation which upgrades the vault contract to our attack contract und subsequently drains
+all DVT tokens from the vault.  
+See [climber.challenge.js](./test/climber/climber.challenge.js) and [ClimberAttack.sol](./contracts/attacker-contracts/ClimberAttack.sol).
