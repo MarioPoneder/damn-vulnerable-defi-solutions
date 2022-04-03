@@ -78,7 +78,7 @@ See [backdoor.challenge.js](./test/backdoor/backdoor.challenge.js) and [Backdoor
 ## 12. Climber
 
 The timelock contract, which is the owner of the vault contract, has a major vulnerability which also endangers the vault.
-The `execute` function of the timelock only checks if the executed operation is scheduled after executing it. This way, we can can change the proposer role
+The `execute` function of the timelock only checks if the executed operation is scheduled after executing it. This way, we can change the proposer role
 of the timelock and schedule the operation during execution in order to pass the check.
 Once the timelock is taken over, we can schedule & execute an operation which upgrades the vault contract to our attack contract und subsequently drains
 all DVT tokens from the vault.  
